@@ -48,9 +48,9 @@ class Page
 		$info = pathinfo($this->raw);
 		$this->template = $info['filename'];	
 		$this->folder = PRONTO_URL.'/content/'.$this->file.'/';
-		$this->visible = preg_match('/^([0-9]+)-([\p{L}\-\_]+)$/u', basename($this->dir), $matches);
+		$this->visible = !!preg_match('/^([0-9]+)-([\p{L}\-\_]+)$/u', basename($this->dir), $matches);
 		$this->hidden = !$this->visible;
-		$this->prefix = intval($matches[1]);
+		$this->prefix = $this->visible ? intval($matches[1]) : 0;
 		$this->content = HelperContainer::parse($this->file);		
 		foreach ($this->content as $key => $val) {
 			if (!in_array($key, array('images', 'videos', 'documents', 'sounds', 'data'))) {
