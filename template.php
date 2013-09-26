@@ -47,9 +47,9 @@ function snippet($template, $data = array())
  *
  * @return string Absolute URL
  */
-function get_url($url)
+function get_url($url = null)
 {
-	return HelperContainer::relative($url) ? PRONTO_URL.'/'.$url : $url;
+	return is_null($url) ? PRONTO_URL : HelperContainer::relative($url) ? PRONTO_URL.'/'.$url : $url;
 }
 
 /**
@@ -57,7 +57,7 @@ function get_url($url)
  *
  * @param string $url Relative URL
  */
-function url($url)
+function url($url = null)
 {
 	echo get_url($url);	
 }
