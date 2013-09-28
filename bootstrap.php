@@ -34,6 +34,7 @@ if (version_compare(PHP_VERSION, '5.3.0') < 0)
  */
 require_once(PRONTO_CORE.DS.'load.php');
 require_once(PRONTO_ROOT.DS.'config.php');
+require_once(PRONTO_CORE.DS.'addons.php');
 
 use Pronto\ConfigContainer;
 use Pronto\GlobalContainer;

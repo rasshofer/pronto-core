@@ -32,13 +32,4 @@ foreach (array(
 	require_once(PRONTO_CORE.DS.$file.'.php');
 }
 
-/**
- * Load custom add-ons
- */
-if (file_exists(PRONTO_ADDONS) && is_dir(PRONTO_ADDONS)) {
-	foreach (new GlobIterator(PRONTO_ADDONS.DS.'*.php') as $item) {
-		require_once($item->getPathname());
-	}
-}
-
 ?>
