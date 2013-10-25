@@ -161,7 +161,7 @@ function text($string)
  */
 function get_html($string)
 {
-	echo HelperContainer::html($string);	
+	return HelperContainer::html($string);	
 }
 
 /**
@@ -171,7 +171,7 @@ function get_html($string)
  */
 function html($string)
 {
-	echo HelperContainer::html($string);	
+	echo get_html($string);	
 }
 
 /**
@@ -181,7 +181,7 @@ function html($string)
  */
 function get_unhtml($string)
 {
-	echo HelperContainer::unhtml($string);	
+	return HelperContainer::unhtml($string);	
 }
 /**
  * Prints string with unescaped HTML entities
@@ -190,7 +190,7 @@ function get_unhtml($string)
  */
 function unhtml($string)
 {
-	echo HelperContainer::unhtml($string);	
+	echo get_unhtml($string);	
 }
 
 /**
