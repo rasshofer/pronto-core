@@ -186,7 +186,7 @@ class PageCollection extends Collection
 	{
 		$pages = array();
 		foreach ($array as $key => $val) {
-			preg_match('/^([0-9]+)-([\p{L}\-\_]+)$/u', $key, $matches);
+			preg_match('/^([0-9]+)-(.+)$/u', $key, $matches);
 			if (!empty($matches)) {
 				$pages[$matches[2]] = $this->convert($val);
 			} else {
@@ -207,7 +207,7 @@ class PageCollection extends Collection
 	{
 		$pages = array();
 		foreach ($array as $key => $val) {
-			preg_match('/^([0-9]+)-([\p{L}\-\_]+)$/u', $key, $matches);
+			preg_match('/^([0-9]+)-(.+)$/u', $key, $matches);
 			if (!empty($matches)) {
 				$pages[$matches[2]] = $this->convert($val);
 			}
