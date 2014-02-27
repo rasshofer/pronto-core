@@ -17,13 +17,13 @@ namespace Pronto;
  */
 class ShortcodeContainer
 {
-	
+
 	/**
 	 * Shortcodes
 	 *
 	 * @var array
 	 */
-	protected static $data = array(); 
+	protected static $data = array();
 
 	/**
 	 * Caller
@@ -48,7 +48,7 @@ class ShortcodeContainer
 	{
 		return array_key_exists($key, self::$data);
 	}
-	
+
 	/**
 	 * Adds a shortcode to the shortcode container
 	 *
@@ -59,7 +59,7 @@ class ShortcodeContainer
 	{
 		self::$data[$key] = $callback;
 	}
-	
+
 }
 
 ?>

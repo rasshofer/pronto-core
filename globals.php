@@ -26,7 +26,7 @@ class GlobalContainer
 	 * @var array
 	 */
 	static private $container = null;
-	
+
     /**
 	 * Returns the container instance
 	 *
@@ -64,7 +64,7 @@ class GlobalContainer
 	{
 		return self::getContainer()->get($key);
 	}
-	
+
 }
 
 ?>

@@ -46,7 +46,7 @@ class File
 			$this->url = $page->folder().$this->filename;
 			$this->modified = filemtime($path);
 			$this->size = filesize($path);
-			$file = $path.'.'.ConfigContainer::get('extension');			
+			$file = $path.'.'.ConfigContainer::get('extension');
 			if (file_exists($file)) {
 				$this->content = HelperContainer::parser($file);
 				foreach ($this->content as $key => $val) {
@@ -110,7 +110,7 @@ class File
 	 */
 	public function niceSize($decimals = 2, $decimalPoint = '.', $thousandsSeparator = '')
 	{
-		return HelperContainer::niceSize($this->size, $decimals, $decimalPoint, $thousandsSeparator);	
+		return HelperContainer::niceSize($this->size, $decimals, $decimalPoint, $thousandsSeparator);
 	}
 
 }

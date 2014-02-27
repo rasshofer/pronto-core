@@ -21,14 +21,14 @@ use Pronto\ContentContainer;
  */
 class HelperContainer
 {
-	
+
 	/**
 	 * Cleans an array and removes empty items
 	 *
 	 * @param array $level The array
 	 *
 	 * @return array Cleaned array
-	 */			
+	 */
 	public static function clean($var)
 	{
 		return array_filter($var, function($var) {
@@ -59,7 +59,7 @@ class HelperContainer
 	{
 		return PRONTO_ROOT.DS.$path;
 	}
-	
+
 	/**
 	 * Searches a directory for content files
 	 *
@@ -69,7 +69,7 @@ class HelperContainer
 	 */
 	public static function content($path)
 	{
-		$dir = PRONTO_CONTENT.DS.$path;		
+		$dir = PRONTO_CONTENT.DS.$path;
 		foreach (new \DirectoryIterator($dir) as $item) {
 			if ($item->isFile()) {
 				if (preg_match('/^(.*)\.'.ConfigContainer::get('extension').'$/i', $item->getFilename())) {
@@ -102,11 +102,11 @@ class HelperContainer
 	{
 		$return = new ContentContainer();
 		if (self::exists($path)) {
-			$return = self::parser(self::content($path));			
+			$return = self::parser(self::content($path));
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * Parses a content file into a ContentContainer
 	 *
@@ -120,9 +120,12 @@ class HelperContainer
 		$content = file_get_contents($path);
 		$explode = array_map('trim', explode(ConfigContainer::get('split-line'), $content));
 		foreach ($explode as $line) {
-			list($key, $value) = array_map('trim', explode(ConfigContainer::get('split-key-value'), $line, 2));
-			$key = strtolower($key);
-			$return->$key = $value;
+			$explode = explode(ConfigContainer::get('split-key-value'), $line, 2);
+			if (count($explode) == 2) {
+				list($key, $value) = array_map('trim', $explode);
+				$key = strtolower($key);
+				$return->$key = $value;
+			}
 		}
 		return $return;
 	}
@@ -150,7 +153,7 @@ class HelperContainer
 	{
 		return htmlspecialchars($string, ENT_COMPAT, 'utf-8');
 	}
-	
+
 	/**
 	 * Returns string with unescaped HTML entities
 	 *
@@ -162,7 +165,7 @@ class HelperContainer
 	{
 		return htmlspecialchars_decode(strip_tags($string), ENT_COMPAT, 'utf-8');
 	}
-	
+
 	/**
 	 * Detect and execute shortcodes
 	 *
@@ -172,7 +175,7 @@ class HelperContainer
 	 */
 	public static function shortcodes($string)
 	{
-		preg_match_all('/\(([^\)]+)\)/s', $string, $matches);		
+		preg_match_all('/\(([^\)]+)\)/s', $string, $matches);
 		if (!empty($matches[0])) {
 			foreach ($matches[0] as $key => $val) {
 				$search = $matches[0][$key];
@@ -191,7 +194,7 @@ class HelperContainer
 						$type = array_shift($keys);
 						$callback = array(__NAMESPACE__.'\ShortcodeContainer', $type);
 						if (ShortcodeContainer::exists($type) && is_callable($callback)) {
-							$parsed = call_user_func($callback, $attributes);							
+							$parsed = call_user_func($callback, $attributes);
 							if ($parsed) {
 								$string = str_replace($search, $parsed, $string);
 							}
@@ -202,7 +205,7 @@ class HelperContainer
 		}
 		return $string;
 	}
-	
+
 	/**
 	 * Returns the formatted file size.
 	 *

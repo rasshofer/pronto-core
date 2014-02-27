@@ -39,7 +39,7 @@ class FileCollection extends Collection
 	{
 		$this->page = $page;
 	}
-	
+
     /**
 	 * Adds a file to the file collection
 	 *

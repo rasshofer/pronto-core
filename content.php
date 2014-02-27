@@ -16,10 +16,10 @@ use Pronto\Container;
  * A PageCollection represents a set of page contents.
  *
  * @author Thomas Rasshofer <tr@prontocms.com>
- */ 
+ */
 class ContentContainer extends Container
 {
-	
+
 }
 
 ?>

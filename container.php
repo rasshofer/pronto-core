@@ -17,7 +17,7 @@ namespace Pronto;
  */
 class Container implements \IteratorAggregate
 {
-	
+
 	/**
 	 * The collection
 	 *
@@ -71,7 +71,7 @@ class Container implements \IteratorAggregate
 				$this->data[$k] = $v;
 			}
 		} else {
-			$this->data[$key] = $value;	
+			$this->data[$key] = $value;
 		}
 	}
 
@@ -92,7 +92,7 @@ class Container implements \IteratorAggregate
 		}
 		return false;
 	}
-		
+
 }
 
 ?>

@@ -50,14 +50,14 @@ class Collection implements \IteratorAggregate, \Countable
 		foreach ($self->data as $link => $page) {
 			if (!preg_match('/'.$pattern.'/', $link)) {
 				unset($self->data[$link]);
-			}		
+			}
 		}
 		return $self;
 	}
-	
+
 	/**
 	 * Reduces collection to those items not matching $pattern
-	 * 
+	 *
 	 * @param string $pattern The RegEx pattern
 	 *
 	 * @return $this
@@ -77,7 +77,7 @@ class Collection implements \IteratorAggregate, \Countable
 	 * Filters collection
 	 *
 	 * Accepts different an amount of parameters (1, 2, 3, or 4)
-	 * 
+	 *
 	 * @param string $search Search for URL
 	 *
 	 * @param string $key The content key
@@ -86,7 +86,7 @@ class Collection implements \IteratorAggregate, \Countable
 	 * @param string $key The content key
 	 * @param string $operator The operator
 	 * @param string $value The value to be compared against $key using $operator
-	 * @param boolean $insensitive Case insensitive 
+	 * @param boolean $insensitive Case insensitive
 	 *
 	 * @return $this
 	 */
@@ -117,7 +117,7 @@ class Collection implements \IteratorAggregate, \Countable
 				}
 			} elseif ($operator == '$=') {
 				$modifier = $insensitive ? 'i' : '';
-				foreach ($self->data as $link => $page) {					
+				foreach ($self->data as $link => $page) {
 					if (!($page->$key() && preg_match('/'.preg_quote($value).'$/'.$modifier, $page->$key()))) {
 						unset($self->data[$link]);
 					}
@@ -154,7 +154,7 @@ class Collection implements \IteratorAggregate, \Countable
 					if (!($page->$key() && $page->$key() <= $value)) {
 						unset($self->data[$link]);
 					}
-				}				
+				}
 			} elseif ($operator == '>') {
 				foreach ($self->data as $link => $page) {
 					if (!($page->$key() && $page->$key() > $value)) {
@@ -168,7 +168,7 @@ class Collection implements \IteratorAggregate, \Countable
 					}
 				}
 			}
-		}	
+		}
 		return $self;
 	}
 
@@ -181,7 +181,7 @@ class Collection implements \IteratorAggregate, \Countable
 	{
 		return count($this->data);
 	}
-	
+
 	/**
 	 * Alias of count()
 	 *
@@ -203,7 +203,7 @@ class Collection implements \IteratorAggregate, \Countable
 	{
 		$self = clone $this;
 		if ($index < 0 || $index >= $self->size()) {
-			return array();	
+			return array();
 		}
 		reset($self->data);
 		for ($i = 0; $i < $index; $i++) {
@@ -241,7 +241,7 @@ class Collection implements \IteratorAggregate, \Countable
 	{
 		$self = clone $this;
 		$self->data = array_reverse($self->data, true);
-		return $self;	
+		return $self;
 	}
 
 	/**
@@ -280,7 +280,7 @@ class Collection implements \IteratorAggregate, \Countable
 	public function limit($limit)
 	{
 		$self = clone $this;
-		return $self->slice(0, $limit);		
+		return $self->slice(0, $limit);
 	}
 
 	/**
@@ -295,14 +295,14 @@ class Collection implements \IteratorAggregate, \Countable
 		$self = clone $this;
 		$i = 1;
 		if ($n < 0 || $n >= $self->size()) {
-			$self->data = array();	
+			$self->data = array();
 		}
 		foreach ($self->data as $link => $check) {
 			if ($i++%$n != 0) {
-				unset($self->data[$link]);	
+				unset($self->data[$link]);
 			}
 		}
-		return $self;	
+		return $self;
 	}
 
 }

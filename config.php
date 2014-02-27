@@ -47,12 +47,12 @@ class ConfigContainer
 	 *
 	 * @param string|array $key The key
 	 * @param mixed|null $value The data
-	 */	
+	 */
 	static public function set($key, $value = null)
 	{
 		return self::getContainer()->set($key, $value);
 	}
-	
+
 	/**
 	 * Get data from the container
 	 *
@@ -64,7 +64,7 @@ class ConfigContainer
 	{
 		return self::getContainer()->get($key);
 	}
-	
+
 }
 
 ?>

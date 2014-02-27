@@ -44,14 +44,15 @@ class Page
 		$this->url = ConfigContainer::get('rewrite') ? PRONTO_URL.'/'.$path : PRONTO_URL.'/?'.$path;
 		$this->id = str_replace('/', '-', $path);
 		$this->raw = HelperContainer::content($this->file);
-		$this->dir = dirname($this->raw);
+		$dir = dirname($this->raw);
+		$this->dir = $dir;
 		$info = pathinfo($this->raw);
-		$this->template = $info['filename'];	
+		$this->template = $info['filename'];
 		$this->folder = PRONTO_URL.'/content/'.$this->file.'/';
 		$this->visible = !!preg_match('/^([0-9]+)-(.+)$/u', basename($this->dir), $matches);
 		$this->hidden = !$this->visible;
 		$this->prefix = $this->visible ? intval($matches[1]) : 0;
-		$this->content = HelperContainer::parse($this->file);		
+		$this->content = HelperContainer::parse($this->file);
 		foreach ($this->content as $key => $val) {
 			if (!in_array($key, array('images', 'videos', 'documents', 'sounds', 'data'))) {
 				$this->$key = $val;
@@ -66,15 +67,14 @@ class Page
 		);
 		foreach ($files as $type => $class) {
 			$this->$type = new FileCollection($this);
-			foreach (scandir($this->dir, 0) as $node) {
-				$node = trim($node);
-				$path = $this->dir.DS.$node;
-				if ($node == '.' || $node == '..'|| is_dir($path)) {
-					continue;
-				}
-				if (preg_match('/^(.*)\.('.implode('|', ConfigContainer::get($type)).')$/i', $node)) {
-					$this->files->add($path, $class);
-					$this->$type->add($path, $class);
+			if(!empty($dir)) {
+				foreach (new \DirectoryIterator($dir) as $item) {
+					if (!$item->isDot() && !$item->isDir()) {
+						if (preg_match('/^(.*)\.('.implode('|', ConfigContainer::get($type)).')$/i', $item->getFilename())) {
+							$this->files->add($item->getPathname(), $class);
+							$this->$type->add($item->getPathname(), $class);
+						}
+					}
 				}
 			}
 		}
@@ -116,6 +116,14 @@ class Page
 	}
 
 	/**
+	 * Is set?
+	 */
+	public function __isset($property)
+	{
+		return isset($this->$property);
+	}
+
+	/**
 	 * Check whether page has files
 	 *
 	 * @return boolean True if page has files, false if otherwise
@@ -124,7 +132,7 @@ class Page
 	{
 		return ($this->files()->size() > 0);
 	}
-	
+
 	/**
 	 * Check whether page has images
 	 *
@@ -134,7 +142,7 @@ class Page
 	{
 		return ($this->images()->size() > 0);
 	}
-	
+
 	/**
 	 * Check whether page has videos
 	 *
@@ -144,7 +152,7 @@ class Page
 	{
 		return ($this->videos()->size() > 0);
 	}
-		
+
 	/**
 	 * Check whether page has documents
 	 *
@@ -154,7 +162,7 @@ class Page
 	{
 		return ($this->documents()->size() > 0);
 	}
-	
+
 	/**
 	 * Check whether page has sounds
 	 *
@@ -164,7 +172,7 @@ class Page
 	{
 		return ($this->sounds()->size() > 0);
 	}
-	
+
 	/**
 	 * Get children pages of current page
 	 *
@@ -182,12 +190,12 @@ class Page
 	 * Check whether page has children pages
 	 *
 	 * @return boolean True if page has children pages, false if otherwise
-	 */	
+	 */
 	public function hasChildren()
 	{
 		return (count($this->children()) > 0);
 	}
-	
+
 	/**
 	 * Get parent page of current page
 	 *
@@ -198,7 +206,7 @@ class Page
 	public function parent($hide = false)
 	{
 		$explode = explode('/', $this->path);
-		array_pop($explode);			
+		array_pop($explode);
 		$path = implode('/', $explode);
 		if (!empty($path)) {
 			$return = $this->pages->filter($path.'/*')->is('^'.preg_quote($path, '/').'\/([^\/]+)$');
@@ -210,7 +218,7 @@ class Page
 		}
 		return $return;
 	}
-	
+
 	/**
 	 * Check whether page has previous page
 	 *
@@ -235,7 +243,7 @@ class Page
 			if ($this->id() != $check->id()) {
 				next($array);
 			} else {
-				break;	
+				break;
 			}
 		}
 		return current($array);
@@ -270,7 +278,7 @@ class Page
 		}
 		return current($array);
 	}
-	
+
 	/**
 	 * Check whether page is the current active page
 	 *
@@ -278,7 +286,7 @@ class Page
 	 */
 	public function active()
 	{
-		$path = preg_quote($this->path, '/');		
+		$path = preg_quote($this->path, '/');
 		return $this->active || preg_match('/(^'.$path.'\/(.*))|(^'.$path.'$)/', $this->pages->active()->path);
 	}
 

@@ -57,7 +57,7 @@ class PageCollection extends Collection
 	{
 		$this->tree = $this->parse(PRONTO_CONTENT);
 		$files = $this->builder($this->tree);
-		$pages = $this->builder($this->convert($this->tree));		
+		$pages = $this->builder($this->convert($this->tree));
 		foreach ($pages as $page) {
 			$this->data[$page] = new Page($page, array_shift($files), $this);
 		}
@@ -88,9 +88,9 @@ class PageCollection extends Collection
 		if (is_null($level)) {
 			if (is_null($this->active)) {
 				$request = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
-				$request = trim(substr($request, strlen(PRONTO_SUB)), '/');		
+				$request = trim(substr($request, strlen(PRONTO_SUB)), '/');
 				$query = trim($_SERVER['QUERY_STRING'], '/');
-				$page = ConfigContainer::get('rewrite') ? $request : $query;					
+				$page = ConfigContainer::get('rewrite') ? $request : $query;
 				$parts = array();
 				$explode = explode('/', $page);
 				foreach ($explode as $part)
@@ -104,8 +104,8 @@ class PageCollection extends Collection
 					}
 				}
 				$page = implode('/', $parts);
-				$page = empty($page) ? (ConfigContainer::get('home') ? ConfigContainer::get('home') : key($this->data)) : $page;				
-				// Search for page				
+				$page = empty($page) ? (ConfigContainer::get('home') ? ConfigContainer::get('home') : key($this->data)) : $page;
+				// Search for page
 				if (array_key_exists($page, $this->data)) {
 					$page = $this->data[$page];
 					$page->active = true;
@@ -130,7 +130,7 @@ class PageCollection extends Collection
 			}
 		} else {
 			$self = clone $this;
-			$search = implode('/', array_slice(explode('/', $self->active()->path()), 0, $level));			
+			$search = implode('/', array_slice(explode('/', $self->active()->path()), 0, $level));
 			return !empty($search) ? $self->filter($search)->first() : false;
 		}
 	}
@@ -159,7 +159,7 @@ class PageCollection extends Collection
 	 * @return array The page tree
 	 */
 	public function parse($dir)
-	{		
+	{
 		$pages = array();
 		foreach (new \DirectoryIterator($dir) as $item) {
 			if (!$item->isDot() && $item->isDir()) {
@@ -293,10 +293,10 @@ class PageCollection extends Collection
 		$self = clone $this;
 		foreach ($self->data as $link => $check) {
 			if ($check->depth() != $depth) {
-				unset($self->data[$link]);	
+				unset($self->data[$link]);
 			}
 		}
-		return $self;	
+		return $self;
 	}
 
 	/**
@@ -311,13 +311,13 @@ class PageCollection extends Collection
 	{
 		$self = clone $this;
 		uasort($self->data, function($a, $b) use ($key) {
-			return strcmp(strval($a->$key()), strval($b->$key()));		
+			return strcmp(strval($a->$key()), strval($b->$key()));
 		});
 		$ascDesc = strtolower($ascDesc);
 		if ($ascDesc == 'desc') {
 			$self->reverse();
 		}
-		return $self;		
+		return $self;
 	}
 
 	/**
@@ -349,15 +349,15 @@ class PageCollection extends Collection
 	 * Get parameter of the current request
 	 *
 	 * @param string $key The desired parameter
-	 * @param string $default Fallback value 
+	 * @param string $default Fallback value
 	 *
-	 * @return string The desired parameter or fallback value if desired parameter does not exist 
+	 * @return string The desired parameter or fallback value if desired parameter does not exist
 	 */
 	public function param($key, $default)
 	{
 		return array_key_exists($key, $this->params) ? $this->params[$key] : $default;
 	}
-	
+
 }
 
 ?>

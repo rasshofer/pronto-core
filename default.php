@@ -29,7 +29,7 @@ ConfigContainer::set(array(
 	 * Use as error page if provided, do not if false
 	 */
 	'error' => false,
-	
+
 	/**
 	 * Send 404 header on errors if true, do not if otherwise
 	 */
@@ -64,7 +64,7 @@ ConfigContainer::set(array(
 	 * Use Markdown if true, do not if false
 	 */
 	'markdown' => true,
-	
+
 	/**
 	 * File extensions
 	 */

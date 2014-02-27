@@ -59,7 +59,7 @@ function get_url($url = null)
  */
 function url($url = null)
 {
-	echo get_url($url);	
+	echo get_url($url);
 }
 
 /**
@@ -85,7 +85,7 @@ function get_css($url, $media = false)
  */
 function css($url, $media = false)
 {
-	echo get_css($url, $media);	
+	echo get_css($url, $media);
 }
 
 /**
@@ -110,38 +110,38 @@ function get_js($url, $async = false)
  */
 function js($url, $async = false)
 {
-	echo get_js($url, $async);	
+	echo get_js($url, $async);
 }
- 
+
 /**
  * Get parameter of the current request
  *
  * @param string $key The desired parameter
- * @param string $default Fallback value 
+ * @param string $default Fallback value
  *
- * @return string The desired parameter or fallback value if desired parameter does not exist 
+ * @return string The desired parameter or fallback value if desired parameter does not exist
  */
 function param($key, $default = null)
 {
 	$pages = GlobalContainer::get('pages');
-	return $pages->param($key, $default);	
+	return $pages->param($key, $default);
 }
 
 /**
  * Get parameter of the current request (alias of param())
  *
  * @param string $key The desired parameter
- * @param string $default Fallback value 
+ * @param string $default Fallback value
  *
- * @return string The desired parameter or fallback value if desired parameter does not exist 
+ * @return string The desired parameter or fallback value if desired parameter does not exist
  */
 function params($key, $default = null)
 {
-	return param($key, $default);	
+	return param($key, $default);
 }
 
 /**
- * Prints string with converted shortcodes (and Markdown, if set) 
+ * Prints string with converted shortcodes (and Markdown, if set)
  *
  * @param string $string The string
  */
@@ -161,7 +161,7 @@ function text($string)
  */
 function get_html($string)
 {
-	return HelperContainer::html($string);	
+	return HelperContainer::html($string);
 }
 
 /**
@@ -171,7 +171,7 @@ function get_html($string)
  */
 function html($string)
 {
-	echo get_html($string);	
+	echo get_html($string);
 }
 
 /**
@@ -181,7 +181,7 @@ function html($string)
  */
 function get_unhtml($string)
 {
-	return HelperContainer::unhtml($string);	
+	return HelperContainer::unhtml($string);
 }
 /**
  * Prints string with unescaped HTML entities
@@ -190,7 +190,7 @@ function get_unhtml($string)
  */
 function unhtml($string)
 {
-	echo get_unhtml($string);	
+	echo get_unhtml($string);
 }
 
 /**
@@ -200,7 +200,7 @@ function unhtml($string)
  */
 function shortcodes($string)
 {
-	echo HelperContainer::shortcodes($string);	
+	echo HelperContainer::shortcodes($string);
 }
 
 ?>
