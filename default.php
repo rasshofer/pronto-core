@@ -80,7 +80,8 @@ ConfigContainer::set(array(
 		'mp4',
 		'mov',
 		'avi',
-		'flv'
+		'flv',
+		'ogv'
 	),
 	'documents' => array(
 		'pdf',
@@ -94,7 +95,9 @@ ConfigContainer::set(array(
 	'sounds' => array(
 		'mp3',
 		'wav',
-		'm4a'
+		'm4a',
+		'ogg',
+		'oga'
 	)
 
 ));
