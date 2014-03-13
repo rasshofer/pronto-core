@@ -141,11 +141,11 @@ function params($key, $default = null)
 }
 
 /**
- * Prints string with converted shortcodes (and Markdown, if set)
+ * Generate string with converted shortcodes (and Markdown, if set)
  *
  * @param string $string The string
  */
-function text($string)
+function get_text($string)
 {
 	if (ConfigContainer::get('markdown')) {
 		echo shortcodes(Markdown($string));
@@ -155,7 +155,17 @@ function text($string)
 }
 
 /**
- * Prints string with escaped HTML entities
+ * Print string with converted shortcodes (and Markdown, if set)
+ *
+ * @param string $string The string
+ */
+function text($string)
+{
+	echo get_text($string);
+}
+
+/**
+ * Generate string with escaped HTML entities
  *
  * @param string $string The string
  */
@@ -165,7 +175,7 @@ function get_html($string)
 }
 
 /**
- * Prints string with escaped HTML entities
+ * Print string with escaped HTML entities
  *
  * @param string $string The string
  */
@@ -175,7 +185,7 @@ function html($string)
 }
 
 /**
- * Prints string with unescaped HTML entities
+ * Print string with unescaped HTML entities
  *
  * @param string $string The string
  */
@@ -184,7 +194,7 @@ function get_unhtml($string)
 	return HelperContainer::unhtml($string);
 }
 /**
- * Prints string with unescaped HTML entities
+ * Print string with unescaped HTML entities
  *
  * @param string $string The string
  */
@@ -194,7 +204,7 @@ function unhtml($string)
 }
 
 /**
- * Prints string with converted shortcodes
+ * Print string with converted shortcodes
  *
  * @param string $string The string
  */
