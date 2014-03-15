@@ -148,9 +148,9 @@ function params($key, $default = null)
 function get_text($string)
 {
 	if (ConfigContainer::get('markdown')) {
-		echo shortcodes(Markdown($string));
+		return shortcodes(Markdown($string));
 	} else {
-		echo shortcodes($string);
+		return shortcodes($string);
 	}
 }
 
