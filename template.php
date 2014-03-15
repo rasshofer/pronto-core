@@ -210,7 +210,7 @@ function unhtml($string)
  */
 function shortcodes($string)
 {
-	echo HelperContainer::shortcodes($string);
+	return HelperContainer::shortcodes($string);
 }
 
 ?>
