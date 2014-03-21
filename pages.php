@@ -300,41 +300,6 @@ class PageCollection extends Collection
 	}
 
 	/**
-	 * Sort current collection
-	 *
-	 * @param string $key The desired key
-	 * @param string $ascDesc The desired order
-	 *
-	 * @return $this
-	 */
-	public function sortBy($key, $ascDesc = 'asc')
-	{
-		$self = clone $this;
-		uasort($self->data, function($a, $b) use ($key) {
-			return strcmp(strval($a->$key()), strval($b->$key()));
-		});
-		$ascDesc = strtolower($ascDesc);
-		if ($ascDesc == 'desc') {
-			$self->reverse();
-		}
-		return $self;
-	}
-
-	/**
-	 * Sort current collection (alias of sortBy())
-	 *
-	 * @param string $key The desired key
-	 * @param string $ascDesc The desired order
-	 *
-	 * @return $this
-	 */
-	public function orderBy($key, $ascDesc = 'asc')
-	{
-		$self = clone $this;
-		return $self->sortBy($key, $ascDesc);
-	}
-
-	/**
 	 * Get children of current collection
 	 *
 	 * @return $this

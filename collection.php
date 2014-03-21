@@ -305,6 +305,41 @@ class Collection implements \IteratorAggregate, \Countable
 		return $self;
 	}
 
+	/**
+	 * Sort current collection
+	 *
+	 * @param string $key The desired key
+	 * @param string $ascDesc The desired order
+	 *
+	 * @return $this
+	 */
+	public function sortBy($key, $ascDesc = 'asc')
+	{
+		$self = clone $this;
+		uasort($self->data, function($a, $b) use ($key) {
+			return strcmp($a->$key(), $b->$key());
+		});
+		$ascDesc = strtolower($ascDesc);
+		if ($ascDesc == 'desc') {
+			$self->reverse();
+		}
+		return $self;
+	}
+
+	/**
+	 * Sort current collection (alias of sortBy())
+	 *
+	 * @param string $key The desired key
+	 * @param string $ascDesc The desired order
+	 *
+	 * @return $this
+	 */
+	public function orderBy($key, $ascDesc = 'asc')
+	{
+		$self = clone $this;
+		return $self->sortBy($key, $ascDesc);
+	}
+
 }
 
 ?>
