@@ -72,7 +72,8 @@ ConfigContainer::set(array(
 		'jpg',
 		'jpeg',
 		'gif',
-		'png'
+		'png',
+		'webp'
 	),
 	'videos' => array(
 		'mpg',
@@ -81,7 +82,8 @@ ConfigContainer::set(array(
 		'mov',
 		'avi',
 		'flv',
-		'ogv'
+		'ogv',
+		'webm'
 	),
 	'documents' => array(
 		'pdf',
