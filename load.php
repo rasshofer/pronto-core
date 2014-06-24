@@ -9,7 +9,7 @@
  */
 
 /**
- * Load required components
+ * Load required components and dependencies
  */
 foreach (array(
 	'container',
@@ -25,9 +25,9 @@ foreach (array(
 	'page',
 	'pages',
 	'template',
-	'markdown',
-	'markdown-extra',
-	'shortcodes'
+	'shortcodes',
+	'parsedown/Parsedown',
+	'parsedown-extra/ParsedownExtra'
 ) as $file) {
 	require_once(PRONTO_CORE.DS.$file.'.php');
 }

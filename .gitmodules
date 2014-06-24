@@ -1,0 +1,6 @@
+[submodule "parsedown"]
+	path = parsedown
+	url = git://github.com/erusev/parsedown.git
+[submodule "parsedown-extra"]
+	path = parsedown-extra
+	url = git://github.com/erusev/parsedown-extra.git
