@@ -26,8 +26,8 @@ foreach (array(
 	'pages',
 	'template',
 	'shortcodes',
-	'parsedown/Parsedown',
-	'parsedown-extra/ParsedownExtra'
+	'parsedown'.DS.'Parsedown',
+	'parsedown-extra'.DS.'ParsedownExtra'
 ) as $file) {
 	require_once(PRONTO_CORE.DS.$file.'.php');
 }
