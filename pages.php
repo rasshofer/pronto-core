@@ -89,7 +89,7 @@ class PageCollection extends Collection
 			if (is_null($this->active)) {
 				$request = trim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 				$request = trim(substr($request, strlen(PRONTO_SUB)), '/');
-				$query = trim($_SERVER['QUERY_STRING'], '/');
+				$query = isset($_SERVER['QUERY_STRING']) ? trim($_SERVER['QUERY_STRING'], '/') : '';
 				$page = ConfigContainer::get('rewrite') ? $request : $query;
 				$parts = array();
 				$explode = explode('/', $page);
