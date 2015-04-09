@@ -149,7 +149,7 @@ function params($key, $default = null)
 function get_text($string)
 {
 	if (ConfigContainer::get('markdown')) {
-		return shortcodes(ConfigContainer::get('parsedown-extra')->text($string));
+		return shortcodes(GlobalContainer::get('parsedown-extra')->text($string));
 	} else {
 		return shortcodes($string);
 	}
