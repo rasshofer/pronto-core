@@ -11,7 +11,6 @@
 use Pronto\ConfigContainer;
 use Pronto\GlobalContainer;
 use Pronto\HelperContainer;
-use \ParsedownExtra;
 
 /**
  * Fill template with data and print the generated contents
