@@ -64,6 +64,14 @@ GlobalContainer::set(array(
 ));
 
 /**
+ * Initialize ParsedownExtra instance
+ */
+
+GlobalContainer::set(array(
+	'parsedown-extra' => new ParsedownExtra()
+));
+
+/**
  * Print requested page
  */
 if ($page) {

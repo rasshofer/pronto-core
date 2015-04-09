@@ -11,7 +11,6 @@
 use Pronto\ConfigContainer;
 use Pronto\GlobalContainer;
 use Pronto\HelperContainer;
-use \ParsedownExtra;
 
 /**
  * Fill template with data and print the generated contents
@@ -149,7 +148,7 @@ function params($key, $default = null)
 function get_text($string)
 {
 	if (ConfigContainer::get('markdown')) {
-		return shortcodes(ParsedownExtra::instance()->text($string));
+		return shortcodes(GlobalContainer::get('parsedown-extra')->text($string));
 	} else {
 		return shortcodes($string);
 	}
